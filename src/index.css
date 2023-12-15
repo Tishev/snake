@@ -78,21 +78,21 @@ input[type='number']::-webkit-outer-spin-button {
     align-items: center;
 }
 .up {
-    width: 5vw;
+    width: 15vw;
     padding: 5px 10px;
 }
 .down {
-    width: 5vw;
+    width: 15vw;
 
     padding: 5px 10px;
 }
 .left {
-    width: 5vw;
+    width: 15vw;
 
     padding: 5px 10px;
 }
 .right {
-    width: 5vw;
+    width: 15vw;
 
     padding: 5px 10px;
 }
