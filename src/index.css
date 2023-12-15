@@ -32,6 +32,7 @@ code {
 }
 .desc {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 20vh;
@@ -69,4 +70,46 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+.block-btn {
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.up {
+    width: 5vw;
+    padding: 5px 10px;
+}
+.down {
+    width: 5vw;
+
+    padding: 5px 10px;
+}
+.left {
+    width: 5vw;
+
+    padding: 5px 10px;
+}
+.right {
+    width: 5vw;
+
+    padding: 5px 10px;
+}
+.block-btn__down {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.btn-upr {
+    margin: 5px;
+    border: none;
+    color: aliceblue;
+    transition: all 300ms ease-out;
+    border-radius: 10%;
+    background-color: rgb(106, 106, 251);
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
 }

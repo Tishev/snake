@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import EastIcon from '@mui/icons-material/East';
+import WestIcon from '@mui/icons-material/West';
 const App = () => {
     const generateFood = () => {
         const newFood = {
@@ -98,6 +101,9 @@ const App = () => {
             }
         }
     };
+    const handleButtonClick = (buttonDirection) => {
+        setDirection(buttonDirection);
+    };
 
     return (
         <div className="block">
@@ -133,6 +139,32 @@ const App = () => {
                                 ></div>
                             );
                         })}
+                    </div>
+                    <div className="block-btn">
+                        <button className="up btn-upr" onClick={() => handleButtonClick('UP')}>
+                            <ArrowUpwardIcon />
+                        </button>
+                        <div className="block-btn__down">
+                            <button
+                                className="left btn-upr"
+                                onClick={() => handleButtonClick('LEFT')}
+                            >
+                                <WestIcon />
+                            </button>
+                            <button
+                                className="down btn-upr"
+                                onClick={() => handleButtonClick('DOWN')}
+                            >
+                                <ArrowDownwardIcon />
+                            </button>
+
+                            <button
+                                className="right btn-upr"
+                                onClick={() => handleButtonClick('RIGHT')}
+                            >
+                                <EastIcon />
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
