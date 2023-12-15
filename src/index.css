@@ -20,9 +20,46 @@ code {
 :root {
     --shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.12);
 }
-.container {
-    width: 1248px;
-    margin: 0 auto;
+.block {
+}
+.title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 30px;
+    background-color: antiquewhite;
+    padding: 15px 25px;
+    border-radius: 15px;
+}
+.desc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20vh;
+}
+.block-retry {
+    margin-top: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.btn {
+    margin-top: 20px;
+    text-align: center;
+    padding: 20px 40px;
+    color: white;
+    background-color: blue;
+    border: none;
+    border: 1px solid blue;
+
+    border-radius: 25px;
+    transition: all 400ms ease-out;
+    &:hover {
+        cursor: pointer;
+        color: blue;
+        background-color: white;
+        border: 1px solid blue;
+    }
 }
 input[type='number'] {
     -moz-appearance: textfield;

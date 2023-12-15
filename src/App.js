@@ -100,11 +100,16 @@ const App = () => {
     };
 
     return (
-        <div>
+        <div className="block">
             {gameOver ? (
-                <p>Game Over!</p>
+                <div className="block-retry">
+                    <p className="title">Game Over!</p>
+                    <button onClick={() => window.location.reload()} className="btn">
+                        Повторить
+                    </button>
+                </div>
             ) : (
-                <div>
+                <div className="desc">
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(20, 20px)' }}>
                         {Array.from({ length: 400 }).map((_, index) => {
                             const x = index % 20;
