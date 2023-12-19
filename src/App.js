@@ -3,7 +3,10 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import EastIcon from '@mui/icons-material/East';
 import WestIcon from '@mui/icons-material/West';
+
 const App = () => {
+    const localStorageKey = 'snakeGameRecord';
+
     const generateFood = () => {
         const newFood = {
             x: Math.floor(Math.random() * 20),
@@ -16,6 +19,8 @@ const App = () => {
     const [food, setFood] = useState(generateFood());
     const [direction, setDirection] = useState('RIGHT');
     const [gameOver, setGameOver] = useState(false);
+    const [record, setRecord] = useState(0);
+    const [yourPoint, setYourPoint] = useState(0);
 
     useEffect(() => {
         const handleKeyPress = (e) => {
@@ -45,8 +50,13 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        if (gameOver) return;
+        const savedRecord = localStorage.getItem(localStorageKey);
+        if (savedRecord) {
+            setRecord(Number(savedRecord));
+        }
+    }, []);
 
+    useEffect(() => {
         const moveSnake = () => {
             const newSnake = [...snake];
             const head = { ...newSnake[0] };
@@ -75,9 +85,14 @@ const App = () => {
             } else {
                 newSnake.pop();
             }
-
+            setYourPoint(newSnake.length);
             checkCollision(newSnake);
             setSnake(newSnake);
+
+            if (newSnake.length > record) {
+                setRecord(newSnake.length);
+                localStorage.setItem(localStorageKey, newSnake.length);
+            }
         };
 
         const gameInterval = setInterval(moveSnake, 200);
@@ -85,7 +100,19 @@ const App = () => {
         return () => {
             clearInterval(gameInterval);
         };
-    }, [snake, direction, gameOver, food]);
+    }, [snake, direction, gameOver, food, record]);
+
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            localStorage.setItem(localStorageKey, record);
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [record]);
 
     const checkCollision = (snake) => {
         const head = snake[0];
@@ -101,6 +128,7 @@ const App = () => {
             }
         }
     };
+
     const handleButtonClick = (buttonDirection) => {
         setDirection(buttonDirection);
     };
@@ -109,6 +137,9 @@ const App = () => {
         <div className="block">
             {gameOver ? (
                 <div className="block-retry">
+                    <h1 className="record">Рекорд: {record}</h1>
+                    <h1 className="record">Вы набрали: {yourPoint}</h1>
+
                     <p className="title">Game Over!</p>
                     <button onClick={() => window.location.reload()} className="btn">
                         Повторить
@@ -116,6 +147,8 @@ const App = () => {
                 </div>
             ) : (
                 <div className="desc">
+                    <h1 className="record">Вы набрали: {yourPoint}</h1>
+
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(20, 20px)' }}>
                         {Array.from({ length: 400 }).map((_, index) => {
                             const x = index % 20;
@@ -157,7 +190,6 @@ const App = () => {
                             >
                                 <ArrowDownwardIcon />
                             </button>
-
                             <button
                                 className="right btn-upr"
                                 onClick={() => handleButtonClick('RIGHT')}
