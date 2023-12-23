@@ -168,6 +168,7 @@ const App = () => {
                                             : isFood
                                             ? 'red'
                                             : 'white',
+                                        borderRadius: isSnake ? '50%' : isFood ? 0 : 0,
                                     }}
                                 ></div>
                             );
